@@ -1,6 +1,7 @@
 import prisma from "@/lib/db";
 import { NextResponse } from "next/server";
 import bcrypt from "bcryptjs";
+import jwt from "jsonwebtoken";
 
 export async function POST(req: Request) {
   try {
@@ -37,7 +38,16 @@ export async function POST(req: Request) {
       },
     });
 
-    return NextResponse.json({ ...user, password: undefined });
+    const token = jwt.sign({ id: user.id }, process.env.ACCESS_TOKEN_SECRET!, {
+      expiresIn: process.env.ACCESS_TOKEN_EXPIRE,
+    });
+
+    return NextResponse.json({
+      ...user,
+      token,
+      password: undefined,
+      hidden: undefined,
+    });
   } catch (error) {
     console.log("[REGISTER_USER]", error);
     return new NextResponse("Internal error", { status: 500 });

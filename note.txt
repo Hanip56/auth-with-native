@@ -1,0 +1,4 @@
+There is 2 method for auth
+
+1. built in auth (next-auth) - this is mainly for admin
+2. using jwt (api) - this is for user only

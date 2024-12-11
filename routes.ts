@@ -10,8 +10,9 @@
  * These routes will redirect logged in users to '/'
  * @type {string[]}
  */
-export const authRoutes = ["/login", "/register"];
+export const clientAuthRoutes = ["/login", "/register"];
 export const apiAuthPrefix = "/api/auth";
+export const apiPrefix = "/api";
 
 /**
  * The prefix for API authentication routes
